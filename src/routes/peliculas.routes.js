@@ -5,6 +5,7 @@ import {
   getPelicula,
   createPelicula,
   updatePelicula,
+  addPersonajeToMovie,
   deletePelicula,
   getPeliculasNombre,
   getPeliculasGenero,
@@ -21,6 +22,7 @@ router.get("/movies/:id", auth, getPelicula);
 // 9. CRUD de Pelicula
 router.post("/movies", auth, createPelicula);
 router.put("/movies/:id", auth, updatePelicula);
+router.put("/movies/:idMovie/personajes/:idCharacter", auth, addPersonajeToMovie);
 router.delete("/movies/:id", auth, deletePelicula);
 // 10. Búsqueda de Películas o Series
 router.get("/movies?name=nombre", auth, getPeliculasNombre);

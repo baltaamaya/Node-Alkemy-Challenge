@@ -1,4 +1,5 @@
 import { Personaje } from "../models/Personaje.js";
+import { Pelicula } from "../models/Pelicula.js";
 
 // 3. Listado de personajes
 export async function getPersonajes(req, res) {
@@ -15,16 +16,13 @@ export async function getPersonajes(req, res) {
 // 4. CRUD de personajes
 export async function createPersonaje(req, res) {
   try {
-    const { Imagen, Nombre, Edad, Peso, Historia, Peliculas } = req.body;
+    const { Imagen, Nombre, Edad, Peso, Historia } = req.body;
     const newPersonaje = await Personaje.create({
       Imagen,
       Nombre,
       Edad,
       Peso,
-      Historia,
-      Peliculas
-    },{
-      include: 'Peliculas'
+      Historia
     });
     res.json(newPersonaje);
   } catch (error) {
@@ -40,6 +38,22 @@ export async function updatePersonaje(req, res) {
     });
     personaje.set(req.body);
     await personaje.save();
+    return res.json(personaje);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export async function addMovieToPersonaje(req, res) {
+  try {
+    const { idMovie, idCharacter } = req.params;
+    const personaje = await Personaje.findOne({
+      where: { idCharacter },
+    });
+    const movie = await Pelicula.findOne({
+      where: { idMovie },
+    });    
+    personaje.addMovie(movie);
     return res.json(personaje);
   } catch (error) {
     return res.status(500).json({ message: error.message });
