@@ -1,4 +1,5 @@
 import { Pelicula } from "../models/Pelicula.js";
+import { Personaje } from "../models/Personaje.js";
 
 // 7. Listado de peliculas
 export async function getPeliculas(req, res) {
@@ -13,6 +14,7 @@ export async function getPeliculas(req, res) {
     });
   }
 }
+
 // 8. Detalle de Pelicula / Serie con sus personajes
 export async function getPelicula(req, res) {
   const { idMovie } = req.params;
@@ -34,15 +36,12 @@ export async function getPelicula(req, res) {
 // 9. CRUD de Pelicula
 export async function createPelicula(req, res) {
   try {
-    const {Imagen, Titulo, Fecha_Creacion, Calificacion, Personajes} = req.body;
+    const {Imagen, Titulo, Fecha_Creacion, Calificacion} = req.body;
     const newPelicula = await Pelicula.create({
       Imagen,
       Titulo,
       Fecha_Creacion,
       Calificacion,
-      Personajes
-    },{
-      include: 'Personajes'
     });
     res.json(newPelicula);
   } catch (error) {
@@ -59,6 +58,22 @@ export async function updatePelicula(req, res) {
     pelicula.set(req.body);
     await pelicula.save();
     return res.json(pelicula);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export async function addPersonajeToMovie(req, res) {
+  try {
+    const { idMovie, idCharacter } = req.params;
+    const personaje = await Personaje.findOne({
+      where: { idCharacter },
+    });
+    const movie = await Pelicula.findOne({
+      where: { idMovie },
+    });    
+    movie.addPersonaje(personaje);
+    return res.json(movie);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
