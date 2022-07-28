@@ -1,8 +1,8 @@
-import { Pelicula } from "../models/Pelicula.js";
-import { Personaje } from "../models/Personaje.js";
+const Personaje = require("../models/Personaje.js");
+const Pelicula = require("../models/Pelicula.js");
 
 // 7. Listado de peliculas
-export async function getPeliculas(req, res) {
+const getPeliculas = async (req, res) => {
   try {
     const peliculas = await Pelicula.findAll({
       atributes: ["Imagen", "Titulo","Fecha_Creacion"],
@@ -16,14 +16,14 @@ export async function getPeliculas(req, res) {
 }
 
 // 8. Detalle de Pelicula / Serie con sus personajes
-export async function getPelicula(req, res) {
+const getPelicula = async (req, res) => {
   const { idMovie } = req.params;
   try {
     const pelicula = await Pelicula.findOne({
       where: { idMovie },
-      attributes: ["Imagen", "Titulo","Fecha_Creacion", "Calificacion","Personajes"],
+      attributes: ["Imagen", "Titulo","Fecha_Creacion", "Calificacion","personajes"],
     },{
-      include: 'Personajes'
+      include: 'personajes'
     });
     res.json(pelicula);
   } catch (error) {
@@ -34,7 +34,7 @@ export async function getPelicula(req, res) {
 }
 
 // 9. CRUD de Pelicula
-export async function createPelicula(req, res) {
+const createPelicula = async (req, res) => {
   try {
     const {Imagen, Titulo, Fecha_Creacion, Calificacion} = req.body;
     const newPelicula = await Pelicula.create({
@@ -49,7 +49,7 @@ export async function createPelicula(req, res) {
   }
 }
 
-export async function updatePelicula(req, res) {
+const updatePelicula = async (req, res) => {
   try {
     const { idMovie } = req.params;
     const pelicula = await Pelicula.findOne({
@@ -63,7 +63,7 @@ export async function updatePelicula(req, res) {
   }
 }
 
-export async function addPersonajeToMovie(req, res) {
+const addPersonajeToMovie = async (req, res) => {
   try {
     const { idMovie, idCharacter } = req.params;
     const personaje = await Personaje.findOne({
@@ -79,7 +79,7 @@ export async function addPersonajeToMovie(req, res) {
   }
 }
 
-export async function deletePelicula(req, res) {
+const deletePelicula = async (req, res) => {
   const { idMovie } = req.params;
   try {
     await Pelicula.destroy({
@@ -92,7 +92,7 @@ export async function deletePelicula(req, res) {
 }
 
 // 10. Búsqueda de Películas o Series
-export async function getPeliculasNombre(req, res) {
+const getPeliculasNombre = async (req, res) => {
   const { nombre } = req.params;
   try {
     const pelicula = await Pelicula.findAll({
@@ -106,7 +106,7 @@ export async function getPeliculasNombre(req, res) {
     return res.status(500).json({ message: error.message });
   }
 }
-export async function getPeliculasGenero(req, res) {
+const getPeliculasGenero = async (req, res) => {
   const { idGemero } = req.params;
   try {
     const pelicula = await Pelicula.findAll({
@@ -120,7 +120,7 @@ export async function getPeliculasGenero(req, res) {
     return res.status(500).json({ message: error.message });
   }
 }
-export async function getPeliculasOrder(req, res) {
+const getPeliculasOrder = async (req, res) => {
   const { order } = req.params;
   try {
     const pelicula = await Pelicula.findAll({
@@ -133,4 +133,16 @@ export async function getPeliculasOrder(req, res) {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
+}
+
+module.exports = {
+  getPeliculas,
+  getPelicula,
+  createPelicula,
+  updatePelicula,
+  addPersonajeToMovie,
+  deletePelicula,
+  getPeliculasNombre,
+  getPeliculasGenero,
+  getPeliculasOrder
 }

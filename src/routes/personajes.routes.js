@@ -1,5 +1,5 @@
-import { Router } from "express";
-import {
+const { Router } = require("express");
+const {
   getPersonajes,
   createPersonaje,
   updatePersonaje,
@@ -9,9 +9,9 @@ import {
   getPersonajeNombre,
   getPersonajeEdad,
   getPersonajePelicula
-} from "../controllers/personajes.controller.js";
+} = require("../controllers/personajes.controller.js");
 
-const auth = require("../middlewares/auth.js")
+const { auth } = require("../middlewares/auth.js");
 const router = Router();
 
 // Routes
@@ -29,4 +29,4 @@ router.get("/characters?name=nombre", auth, getPersonajeNombre);
 router.get("/characters?age=edad", auth, getPersonajeEdad);
 router.get("/characters?movies=idMovie", auth, getPersonajePelicula);
 
-export default router;
+//export default router;

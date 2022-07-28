@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const authConfig = require("../../config/auth.js");
 
-module.exports = (req, res, next) => {
+export default async function  auth(req, res, next) {
     //Comprobar si existe token
     if (!req.headers.authorization) {
         res.status(401).json({msg: "Acceso no autorizado"})

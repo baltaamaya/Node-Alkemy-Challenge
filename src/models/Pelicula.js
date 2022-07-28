@@ -29,9 +29,9 @@ export const Pelicula = sequelize.define(
     timestamps: false,
   }
 );
-Pelicula.belongsToMany(Personaje, {through:"PersonajePelicula", as:"personajes"});
+// Pelicula.belongsToMany(Personaje, {through:"PersonajePelicula", as:"personajes"});
 
 Pelicula.belongsTo(Genero,{
-  foreignKey: "idGenero",
-  targetKey: "idMovie"  
+  foreignKey: "idMovie",
+  targetKey: "idGenero"  
 })

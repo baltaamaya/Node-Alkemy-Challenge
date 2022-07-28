@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
+import { Pelicula } from "./Pelicula.js";
 
 export const Genero = sequelize.define(
   "genero",
@@ -21,7 +22,7 @@ export const Genero = sequelize.define(
   }
 );
 
-Genero.hasMany(Pelicula,{
-  foreignKey: "idGenero",
-  sourceKey: "idMovie"
-})
+// Genero.hasMany(Pelicula,{
+//   foreignKey: "idGenero",
+//   sourceKey: "idMovie"
+// })

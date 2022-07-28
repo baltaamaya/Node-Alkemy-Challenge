@@ -1,4 +1,5 @@
-import { User } from "../models/User.js";
+//import { User } from "../models/User.js";
+const User = require('../models/User.js');
 // import { User } from "../index.js"
 require("dotenv").config();
 const sgMail = require("@sendgrid/mail")
@@ -21,7 +22,7 @@ const sendMail = async (recipient) => {
 }
 
 // 2. Autenticación de Usuarios
-export async function register(req, res) {
+const register = async (req, res) => {
 
     // Encriptamos la contraseña
     let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
@@ -47,7 +48,7 @@ export async function register(req, res) {
     });
 }
 
-export async function login(req, res) {
+const login = async (req, res) => {
     let { email, password } = req.body;
         // Buscar usuario
     User.findOne({
@@ -75,4 +76,9 @@ export async function login(req, res) {
     }).catch(err => {
         res.status(500).json(err);
     })
+}
+
+module.exports = {
+    register,
+    login
 }

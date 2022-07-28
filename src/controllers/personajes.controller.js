@@ -1,8 +1,8 @@
-import { Personaje } from "../models/Personaje.js";
-import { Pelicula } from "../models/Pelicula.js";
+const Personaje = require("../models/Personaje.js");
+const Pelicula = require("../models/Pelicula.js");
 
 // 3. Listado de personajes
-export async function getPersonajes(req, res) {
+const getPersonajes = async (req, res) => {
   try {
     const personajes = await Personaje.findAll({
       attributes: ["Imagen", "Nombre"],
@@ -14,7 +14,7 @@ export async function getPersonajes(req, res) {
   }
 }
 // 4. CRUD de personajes
-export async function createPersonaje(req, res) {
+const createPersonaje = async (req, res) => {
   try {
     const { Imagen, Nombre, Edad, Peso, Historia } = req.body;
     const newPersonaje = await Personaje.create({
@@ -30,7 +30,7 @@ export async function createPersonaje(req, res) {
   }
 }
 
-export async function updatePersonaje(req, res) {
+const updatePersonaje = async (req, res) => {
   try {
     const { id } = req.params;
     const personaje = await Personaje.findOne({
@@ -44,7 +44,7 @@ export async function updatePersonaje(req, res) {
   }
 }
 
-export async function addMovieToPersonaje(req, res) {
+const addMovieToPersonaje = async (req, res) => {
   try {
     const { idMovie, idCharacter } = req.params;
     const personaje = await Personaje.findOne({
@@ -60,7 +60,7 @@ export async function addMovieToPersonaje(req, res) {
   }
 }
 
-export async function deletePersonaje(req, res) {
+const deletePersonaje = async (req, res) => {
   const { id } = req.params;
   try {
     await Personaje.destroy({
@@ -73,14 +73,14 @@ export async function deletePersonaje(req, res) {
   }
 }
 // 5. Detalles de personaje
-export async function getPersonaje(req, res) {
+const getPersonaje = async (req, res) => {
   const { id } = req.params;
   try {
     const task = await Personaje.findOne({
       where: { id },
-      attributes: ["Imagen", "Nombre", "Edad", "Peso", "Historia", "Peliculas" ],
+      attributes: ["Imagen", "Nombre", "Edad", "Peso", "Historia", "peliculas" ],
     },{
-      include: 'Peliculas'
+      include: 'peliculas'
     });
     res.json(task);
   } catch (error) {
@@ -88,7 +88,7 @@ export async function getPersonaje(req, res) {
   }
 }
 // 6. Busqueda de personajes
-export async function getPersonajeNombre(req, res) {
+const getPersonajeNombre = async(req, res) => {
   const { Nombre } = req.params;
   try {
     const personaje = await Personaje.findAll({
@@ -102,7 +102,7 @@ export async function getPersonajeNombre(req, res) {
     return res.status(500).json({ message: error.message });
   }
 }
-export async function getPersonajeEdad(req, res) {
+const getPersonajeEdad = async(req, res) => {
   const { Nombre } = req.params;
   try {
     const personaje = await Personaje.findOne({
@@ -116,7 +116,7 @@ export async function getPersonajeEdad(req, res) {
     return res.status(500).json({ message: error.message });
   }
 }
-export async function getPersonajePelicula(req, res) {
+const getPersonajePelicula = async(req, res) => {
   const { idMovie } = req.params;
   try {
     const personaje = await Personaje.findOne({
@@ -129,4 +129,16 @@ export async function getPersonajePelicula(req, res) {
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
+}
+
+module.exports = {
+  getPersonajes,
+  createPersonaje,
+  updatePersonaje,
+  addMovieToPersonaje,
+  deletePersonaje,
+  getPersonaje,
+  getPersonajeNombre,
+  getPersonajeEdad,
+  getPersonajePelicula
 }

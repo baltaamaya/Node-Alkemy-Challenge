@@ -1,18 +1,17 @@
-import express from "express";
+const express = require("express");
 //import morgan from "morgan";
 
 const app = express();
-
-// Import routes
-//import projectRoutes from "./routes/projects.routes.js";
-//import taskRoutes from "./routes/tasks.routes.js";
+personajesRoutes = require("./routes/personajes.routes.js");
+peliculasRoutes = require("./routes/peliculas.routes.js");
+authRoutes = require("./routes/auth.js");
 
 // Middlewares
-//app.use(morgan("dev"));
-//app.use(express.json());
+app.use(express.json());
 
 // Routes
-//app.use("/api/projects", projectRoutes);
-//app.use("/api/tasks", taskRoutes);
+app.use("/", personajesRoutes);
+app.use("/", peliculasRoutes);
+app.use("/",authRoutes);
 
-export default app;
+//export default app;
