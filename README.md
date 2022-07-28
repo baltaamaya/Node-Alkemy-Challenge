@@ -1,10 +1,10 @@
-## Nodejs Sequelize RESTAPI PostgreSQL
+## Nodejs Sequelize RESTAPI MySQL
 
-This is a simple REST API using Javascript Technologies and PostgreSQL.
+This is a simple REST API using Javascript Technologies and MySQL.
 
 - nodejs
 - express
-- postgreSQL
+- MySQL
 - sequelize
 
 ## Modeling
