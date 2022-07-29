@@ -1,8 +1,7 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../database/database.js";
-import { Pelicula } from "./Pelicula.js";
+const { DataTypes } =require("sequelize");
+const sequelize = require("../database/database.js");
 
-export const Personaje = sequelize.define(
+const Personaje = sequelize.define(
   "personaje",
   {
     id: {
@@ -31,4 +30,4 @@ export const Personaje = sequelize.define(
   }
 );
 
-Personaje.belongsToMany(Pelicula, {through:"PersonajePelicula", as:"peliculas"});
+module.exports = Personaje;

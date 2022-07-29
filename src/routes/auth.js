@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { login, register } from "../controllers/auth.controller.js";
-import ("../middlewares/auth.js");
+const { Router } = require("express");
+const { login, register } = require("../controllers/auth.controller.js");
+require("../middlewares/auth.js");
 
 const router = Router();
 
@@ -9,5 +9,4 @@ const router = Router();
 router.post('/auth/login', login);
 router.post('/auth/register', register);
 
-
-export default router;
+module.exports = router ;

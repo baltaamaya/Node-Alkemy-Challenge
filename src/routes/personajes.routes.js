@@ -29,4 +29,4 @@ router.get("/characters?name=nombre", auth, getPersonajeNombre);
 router.get("/characters?age=edad", auth, getPersonajeEdad);
 router.get("/characters?movies=idMovie", auth, getPersonajePelicula);
 
-//export default router;
+module.exports = router ;

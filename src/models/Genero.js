@@ -1,9 +1,7 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../database/database.js";
-import { Pelicula } from "./Pelicula.js";
+const { DataTypes } =require("sequelize");
+const sequelize = require("../database/database.js");
 
-export const Genero = sequelize.define(
-  "genero",
+const Genero = sequelize.define("genero",
   {
     idGenero: {
       type: DataTypes.INTEGER,
@@ -22,7 +20,4 @@ export const Genero = sequelize.define(
   }
 );
 
-// Genero.hasMany(Pelicula,{
-//   foreignKey: "idGenero",
-//   sourceKey: "idMovie"
-// })
+module.exports = Genero;

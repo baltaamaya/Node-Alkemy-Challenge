@@ -1,9 +1,7 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../database/database.js";
-import { Genero } from "./Genero.js";
-import { Personaje }from "./Personaje.js"
+const { DataTypes } =require("sequelize");
+const sequelize = require("../database/database.js");
 
-export const Pelicula = sequelize.define(
+const Pelicula = sequelize.define(
   "pelicula",
   {
     idMovie: {
@@ -29,9 +27,5 @@ export const Pelicula = sequelize.define(
     timestamps: false,
   }
 );
-// Pelicula.belongsToMany(Personaje, {through:"PersonajePelicula", as:"personajes"});
 
-Pelicula.belongsTo(Genero,{
-  foreignKey: "idMovie",
-  targetKey: "idGenero"  
-})
+module.exports = Pelicula;

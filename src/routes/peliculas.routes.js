@@ -1,6 +1,6 @@
-import { Router } from "express";
-const auth = require("../middlewares/auth.js")
-import {
+const { Router } = require("express");
+const { auth } = require("../middlewares/auth.js");
+const {
   getPeliculas,
   getPelicula,
   createPelicula,
@@ -10,7 +10,7 @@ import {
   getPeliculasNombre,
   getPeliculasGenero,
   getPeliculasOrder
-} from "../controllers/peliculas.controller.js";
+} = require("../controllers/peliculas.controller.js");
 
 const router = Router();
 
@@ -29,4 +29,5 @@ router.get("/movies?name=nombre", auth, getPeliculasNombre);
 router.get("/movies?genre=idGenero", auth, getPeliculasGenero);
 router.get("/movies?order=ASC | DESC", auth, getPeliculasOrder);
 
-export default router;
+module.exports = router ;
+
