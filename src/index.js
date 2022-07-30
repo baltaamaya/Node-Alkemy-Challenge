@@ -4,6 +4,7 @@ const sequelize = require("./database/database.js");
 //const bodyParser = require('body-parser')
 require('./models/Associations.js');
 require('dotenv').config();
+indexRoutes = require("./routes/index.js");
 personajesRoutes = require("./routes/personajes.routes.js");
 peliculasRoutes = require("./routes/peliculas.routes.js");
 authRoutes = require("./routes/auth.js");
@@ -13,13 +14,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
+app.use("/",indexRoutes);
 app.use("/", personajesRoutes);
 app.use("/", peliculasRoutes);
 app.use("/",authRoutes);
 
 async function main() {
   try {
-    await sequelize.sync();
+    await sequelize.sync({alter: true});
     await sequelize.authenticate();
     app.listen(process.env.PORT || 3000);
     console.log(`Server on port ${process.env.PORT}`);

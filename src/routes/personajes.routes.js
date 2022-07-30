@@ -6,9 +6,7 @@ const {
   addMovieToPersonaje,
   deletePersonaje,
   getPersonaje,
-  getPersonajeNombre,
-  getPersonajeEdad,
-  getPersonajePelicula
+  findPersonajes
 } = require("../controllers/personajes.controller.js");
 
 const { auth } = require("../middlewares/auth.js");
@@ -25,8 +23,6 @@ router.delete("/characters/:id", auth, deletePersonaje);
 // 5. Detalles de personaje
 router.get("/characters/:id", auth, getPersonaje);
 // 6. Busqueda de personajes
-router.get("/characters?name=nombre", auth, getPersonajeNombre);
-router.get("/characters?age=edad", auth, getPersonajeEdad);
-router.get("/characters?movies=idMovie", auth, getPersonajePelicula);
+router.get("/characters", auth, findPersonajes);
 
 module.exports = router ;

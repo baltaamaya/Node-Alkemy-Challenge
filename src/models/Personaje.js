@@ -22,7 +22,7 @@ const Personaje = sequelize.define(
       type: DataTypes.FLOAT,
     },
     Historia: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT('long'),
     },    
   },
   {

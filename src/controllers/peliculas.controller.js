@@ -36,12 +36,13 @@ const getPelicula = async (req, res) => {
 // 9. CRUD de Pelicula
 const createPelicula = async (req, res) => {
   try {
-    const {Imagen, Titulo, Fecha_Creacion, Calificacion} = req.body;
+    const {Imagen, Titulo, Fecha_Creacion, Calificacion, Genero} = req.body;
     const newPelicula = await Pelicula.create({
       Imagen,
       Titulo,
       Fecha_Creacion,
       Calificacion,
+      Genero
     });
     res.json(newPelicula);
   } catch (error) {
@@ -80,10 +81,10 @@ const addPersonajeToMovie = async (req, res) => {
 }
 
 const deletePelicula = async (req, res) => {
-  const { idMovie } = req.params;
+  const { id } = req.params;
   try {
     await Pelicula.destroy({
-      where: { idMovie },
+      where: { idMovie : id },
     });
     return res.sendStatus(204);
   } catch (error) {
