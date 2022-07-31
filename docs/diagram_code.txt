@@ -1,15 +1,38 @@
-Table project {
-  id int [PK]
-  name varchar
-  priority int
-  description text
+//// -- Tables and References
+
+// Creating tables
+Table Personaje as {
+  id int [pk] // 
+  Imagen longblob
+  Nombre varchar
+  Edad tinyint
+  Peso float
+  Historia longtext
 }
 
-Table task {    
-  id int [PK]
-  name varchar
-  done boolean
-  projectId int
+Table Pelicula {
+  id int [pk]
+  Imagen longblob
+  Titulo varchar
+  Fecha_creacion date
+  Calificacion range
+  Genero varchar
 }
 
-Ref: project.id < task.projectId
+Table Personajepelicula {
+  personajeId int
+  peliculaId int
+}
+
+Table Genero {
+  genero_id int [pk]
+  Nombre varchar
+  Imagen longblob
+ }
+
+// Creating references
+
+Ref: Personaje.id - Personajepelicula.personajeId 
+Ref: Pelicula.id - Personajepelicula.peliculaId 
+Ref: Genero.Nombre > Pelicula.Genero
+
