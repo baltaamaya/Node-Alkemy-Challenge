@@ -7,87 +7,605 @@
 	},
 	"item": [
 		{
-			"name": "Register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Baltasar\",\r\n    \"email\" : \"baltaamaya@gmail.com\",\r\n    \"password\" : \"firstpassword\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Login",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Baltasar\",\r\n    \"email\" : \"baltaamaya@gmail.com\",\r\n    \"password\" : \"firstpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Baltasar",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "baltaamaya@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "firstpassword",
+									"disabled": true
+								}
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:3000/auth/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"auth",
-						"register"
-					],
-					"query": [
-						{
-							"key": "name",
-							"value": "Baltasar",
-							"disabled": true
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"baltaamaya@gmail.com\",\r\n    \"password\" : \"firstpassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "email",
-							"value": "baltaamaya@gmail.com",
-							"disabled": true
-						},
-						{
-							"key": "password",
-							"value": "firstpassword",
-							"disabled": true
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "baltaamaya@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "firstpassword",
+									"disabled": true
+								}
+							]
 						}
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\" : \"baltaamaya@gmail.com\",\r\n    \"password\" : \"firstpassword\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Movies",
+			"item": [
+				{
+					"name": "Add new movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjczMTYyLCJleHAiOjE2NTkzNTk1NjJ9.NK-wLMN3ebakAww68Nf7ZsFDtLj17qc0ADrW14H61yY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Imagen\" : \"https://static.wikia.nocookie.net/marveldatabase/images/8/8b/Avengers_Infinity_War_poster_002.jpg/revision/latest/scale-to-width-down/337?cb=20180318160428\",\r\n\"Titulo\" : \"Avengers: Infinity War\",\r\n\"Fecha_Creacion\" : \"2018-04-24\",\r\n\"Calificacion\" : \"4\",\r\n\"Genero\" : \"Action\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies"
+							]
 						}
-					}
+					},
+					"response": []
 				},
+				{
+					"name": "Get movies",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjczMTYyLCJleHAiOjE2NTkzNTk1NjJ9.NK-wLMN3ebakAww68Nf7ZsFDtLj17qc0ADrW14H61yY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get movie detalis",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjcwODA0LCJleHAiOjE2NTkzNTcyMDR9.4ftGwuJWN5x2VOJz2aqlhYbO6OdtSzJ6qxrN3kmz64A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/movies/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjcwODA0LCJleHAiOjE2NTkzNTcyMDR9.4ftGwuJWN5x2VOJz2aqlhYbO6OdtSzJ6qxrN3kmz64A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Titulo\" : \"Avengers: Infinity War\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movies/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add character to movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjczMTYyLCJleHAiOjE2NTkzNTk1NjJ9.NK-wLMN3ebakAww68Nf7ZsFDtLj17qc0ADrW14H61yY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/movies/:idMovie/characters/:idCharacter/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								":idMovie",
+								"characters",
+								":idCharacter",
+								""
+							],
+							"variable": [
+								{
+									"key": "idMovie",
+									"value": "1"
+								},
+								{
+									"key": "idCharacter",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete movie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjczMTYyLCJleHAiOjE2NTkzNTk1NjJ9.NK-wLMN3ebakAww68Nf7ZsFDtLj17qc0ADrW14H61yY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Historia\" : \"Cpt. Steven 'Steve' Rogers a.k.a. Captain America, the First Avenger, was rejected by the U.S. Army during World War II due to numerous health problems. He ultimately volunteered for Project Rebirth where he received the Super-Soldier Serum developed by Dr. Abraham Erskine. The serum greatly enhanced his frail body to the peak of human physicality.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movies/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Characters",
+			"item": [
+				{
+					"name": "Add new character",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjczMTYyLCJleHAiOjE2NTkzNTk1NjJ9.NK-wLMN3ebakAww68Nf7ZsFDtLj17qc0ADrW14H61yY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"Imagen\" : \"https://static.wikia.nocookie.net/marveldatabase/images/0/0a/Iron_Man_Vol_6_1_Brooks_Variant_Textless.jpg/revision/latest/scale-to-width-down/325?cb=20211207231858\",\r\n\"Nombre\" : \"Iron Man\",\r\n\"Edad\" : \"35\",\r\n\"Peso\" : \"80\",\r\n\"Historia\" : \"Tony Stark is a genius inventor and billionaire industrialist, who suits up in his armor of cutting-edge technology to become the super hero Iron Man.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get characters",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjczMTYyLCJleHAiOjE2NTkzNTk1NjJ9.NK-wLMN3ebakAww68Nf7ZsFDtLj17qc0ADrW14H61yY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/characters?Nombre=Iron Man",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"characters"
+							],
+							"query": [
+								{
+									"key": "Nombre",
+									"value": "Iron Man"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get character detalis",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjcwODA0LCJleHAiOjE2NTkzNTcyMDR9.4ftGwuJWN5x2VOJz2aqlhYbO6OdtSzJ6qxrN3kmz64A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/characters/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"characters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update character",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MTcxMjMyLCJleHAiOjE2NTkyNTc2MzJ9.9hanYW8zxJFIa-Y0a--veLLVWVoqTXK36OfY-x1JQsg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Historia\" : \"Cpt. Steven 'Steve' Rogers a.k.a. Captain America, the First Avenger, was rejected by the U.S. Army during World War II due to numerous health problems. He ultimately volunteered for Project Rebirth where he received the Super-Soldier Serum developed by Dr. Abraham Erskine. The serum greatly enhanced his frail body to the peak of human physicality.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/characters/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"characters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete character",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MTcxMjMyLCJleHAiOjE2NTkyNTc2MzJ9.9hanYW8zxJFIa-Y0a--veLLVWVoqTXK36OfY-x1JQsg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Historia\" : \"Cpt. Steven 'Steve' Rogers a.k.a. Captain America, the First Avenger, was rejected by the U.S. Army during World War II due to numerous health problems. He ultimately volunteered for Project Rebirth where he received the Super-Soldier Serum developed by Dr. Abraham Erskine. The serum greatly enhanced his frail body to the peak of human physicality.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/characters/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"characters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add movie to character",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo5LCJOYW1lIjoiQmFsdGFzYXIiLCJFbWFpbCI6ImJhbHRhYW1heWFAZ21haWwuY29tIiwiUGFzc3dvcmQiOiIkMmIkMTAkeERTaWF0bFRRNDYwUm02b29vQnRUZU5RbkVKMVVUZW0zMlNZRngyYUlTTTM2NjhwalFseXkifSwiaWF0IjoxNjU5MjczMTYyLCJleHAiOjE2NTkzNTk1NjJ9.NK-wLMN3ebakAww68Nf7ZsFDtLj17qc0ADrW14H61yY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/characters/:idCharacter/movies/:idMovie",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"characters",
+								":idCharacter",
+								"movies",
+								":idMovie"
+							],
+							"variable": [
+								{
+									"key": "idCharacter",
+									"value": "1"
+								},
+								{
+									"key": "idMovie",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Index",
+			"request": {
+				"method": "GET",
+				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/auth/login",
+					"raw": "http://localhost:3000/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"auth",
-						"login"
-					],
-					"query": [
-						{
-							"key": "email",
-							"value": "baltaamaya@gmail.com",
-							"disabled": true
-						},
-						{
-							"key": "password",
-							"value": "firstpassword",
-							"disabled": true
-						}
+						""
 					]
 				}
 			},

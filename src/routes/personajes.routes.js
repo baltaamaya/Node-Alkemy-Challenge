@@ -23,6 +23,6 @@ router.delete("/characters/:id", auth, deletePersonaje);
 // 5. Detalles de personaje
 router.get("/characters/:id", auth, getPersonaje);
 // 6. Busqueda de personajes
-router.get("/characters", auth, findPersonajes);
+//router.get("/findcharacters", auth, findPersonajes);
 
 module.exports = router ;

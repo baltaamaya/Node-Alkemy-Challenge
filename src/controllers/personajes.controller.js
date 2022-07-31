@@ -2,11 +2,12 @@ const Personaje = require("../models/Personaje.js");
 const Pelicula = require("../models/Pelicula.js");
 
 // 3. Listado de personajes
+// 6. Busqueda de personajes
 const getPersonajes = async (req, res) => {
   try {
     const personajes = await Personaje.findAll({
-      attributes: ["Imagen", "Nombre"],
-      order: [["Nombre", "DESC"]],
+      where: req.query,
+      attributes: ["Imagen", "Nombre"]
     });
     res.json(personajes);
   } catch (error) {
@@ -51,7 +52,7 @@ const addMovieToPersonaje = async (req, res) => {
       where: { id: idCharacter },
     });
     const movie = await Pelicula.findOne({
-      where: { idMovie },
+      where: { id: idMovie },
     });    
     personaje.addPelicula(movie);
     return res.json(personaje);
@@ -76,77 +77,22 @@ const deletePersonaje = async (req, res) => {
 const getPersonaje = async (req, res) => {
   const { id } = req.params;
   try {
-    const task = await Personaje.findOne({
+    const personajeDetails = await Personaje.findOne({
       where: { id }
     },{
-      include: [{
-        model: "Pelicula",
-        as: "peliculas"
-      }]
+      include: {
+        model: Pelicula,
+        as: "peliculas",
+        through: {
+                    attributes: []
+                }
+      }
     });
-    res.json(task);
+    res.json(personajeDetails);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 }
-// 6. Busqueda de personajes
-
-const findPersonajes = async(req, res) => {
-  const { Nombre } = req.params;
-  try {
-    const personaje = await Personaje.findAll({
-      where: req.query,
-      attributes: ["id","Imagen", "Edad", "Peso", "Historia", "Peliculas" ],
-    },{
-      include: 'Peliculas'
-    });
-    res.json(personaje);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-}
-// const getPersonajeNombre = async(req, res) => {
-//   const { Nombre } = req.params;
-//   try {
-//     const personaje = await Personaje.findAll({
-//       where: { Nombre },
-//       attributes: ["id","Imagen", "Edad", "Peso", "Historia", "Peliculas" ],
-//     },{
-//       include: 'Peliculas'
-//     });
-//     res.json(personaje);
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// }
-// const getPersonajeEdad = async(req, res) => {
-//   const { Nombre } = req.params;
-//   try {
-//     const personaje = await Personaje.findOne({
-//       where: { Edad },
-//       attributes: ["id", "Imagen", "Peso", "Historia", "Peliculas" ],
-//     },{
-//       include: 'Peliculas'
-//     });
-//     res.json(personaje);
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// }
-// const getPersonajePelicula = async(req, res) => {
-//   const { idMovie } = req.params;
-//   try {
-//     const personaje = await Personaje.findOne({
-//       where: { Edad },
-//       attributes: ["id", "Imagen", "Peso", "Historia", "Peliculas" ],
-//     },{
-//       include: 'Peliculas'
-//     });
-//     res.json(personaje);
-//   } catch (error) {
-//     return res.status(500).json({ message: error.message });
-//   }
-// }
 
 module.exports = {
   getPersonajes,
@@ -154,6 +100,5 @@ module.exports = {
   updatePersonaje,
   addMovieToPersonaje,
   deletePersonaje,
-  getPersonaje,
-  findPersonajes
+  getPersonaje
 }

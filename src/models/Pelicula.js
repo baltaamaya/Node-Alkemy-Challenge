@@ -4,11 +4,11 @@ const sequelize = require("../database/database.js");
 const Pelicula = sequelize.define(
   "pelicula",
   {
-    idMovie: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
-    },
+    },    
     Imagen: {
       type: DataTypes.STRING  
     },

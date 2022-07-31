@@ -2,9 +2,11 @@ const Personaje = require("../models/Personaje.js");
 const Pelicula = require("../models/Pelicula.js");
 
 // 7. Listado de peliculas
+// 10. Búsqueda de Películas o Series
 const getPeliculas = async (req, res) => {
   try {
     const peliculas = await Pelicula.findAll({
+      where: req.query,
       atributes: ["Imagen", "Titulo","Fecha_Creacion"],
     });
     res.json(peliculas);
@@ -17,11 +19,11 @@ const getPeliculas = async (req, res) => {
 
 // 8. Detalle de Pelicula / Serie con sus personajes
 const getPelicula = async (req, res) => {
-  const { idMovie } = req.params;
+  const { id } = req.params;
   try {
     const pelicula = await Pelicula.findOne({
-      where: { idMovie },
-      attributes: ["Imagen", "Titulo","Fecha_Creacion", "Calificacion","personajes"],
+      where: { id },
+      attributes: ["Imagen", "Titulo","Fecha_Creacion", "Calificacion"],
     },{
       include: 'personajes'
     });
@@ -52,9 +54,9 @@ const createPelicula = async (req, res) => {
 
 const updatePelicula = async (req, res) => {
   try {
-    const { idMovie } = req.params;
+    const { id } = req.params;
     const pelicula = await Pelicula.findOne({
-      where: { idMovie },
+      where: { id },
     });
     pelicula.set(req.body);
     await pelicula.save();
@@ -68,10 +70,10 @@ const addPersonajeToMovie = async (req, res) => {
   try {
     const { idMovie, idCharacter } = req.params;
     const personaje = await Personaje.findOne({
-      where: { idCharacter },
+      where: { id: idCharacter },
     });
     const movie = await Pelicula.findOne({
-      where: { idMovie },
+      where: { id: idMovie },
     });    
     movie.addPersonaje(personaje);
     return res.json(movie);
@@ -84,53 +86,9 @@ const deletePelicula = async (req, res) => {
   const { id } = req.params;
   try {
     await Pelicula.destroy({
-      where: { idMovie : id },
+      where: { id },
     });
     return res.sendStatus(204);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-}
-
-// 10. Búsqueda de Películas o Series
-const getPeliculasNombre = async (req, res) => {
-  const { nombre } = req.params;
-  try {
-    const pelicula = await Pelicula.findAll({
-      where: { Titulo: nombre },
-      attributes: ["idMovie","Imagen","Fecha_Creacion", "Calificacion", "Personajes","Genero" ],
-    },{
-      include: ["Personajes", "Genero"]
-    });
-    res.json(pelicula);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-}
-const getPeliculasGenero = async (req, res) => {
-  const { idGemero } = req.params;
-  try {
-    const pelicula = await Pelicula.findAll({
-      where: { Genero: idGemero },
-      attributes: ["idMovie","Imagen","Titulo","Fecha_Creacion", "Calificacion", "Personajes"],
-    },{
-      include: ["Personajes", "Genero"]
-    });
-    res.json(pelicula);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-}
-const getPeliculasOrder = async (req, res) => {
-  const { order } = req.params;
-  try {
-    const pelicula = await Pelicula.findAll({
-      where: { order: [["Fecha_Creacion", order]] },
-      attributes: ["idMovie","Imagen","Fecha_Creacion", "Calificacion", "Personajes","Genero" ],
-    },{
-      include: ["Personajes", "Genero"]
-    });
-    res.json(pelicula);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
@@ -142,8 +100,5 @@ module.exports = {
   createPelicula,
   updatePelicula,
   addPersonajeToMovie,
-  deletePelicula,
-  getPeliculasNombre,
-  getPeliculasGenero,
-  getPeliculasOrder
+  deletePelicula
 }
